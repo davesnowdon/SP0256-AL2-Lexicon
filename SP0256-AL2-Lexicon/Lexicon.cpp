@@ -2,9 +2,77 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <map>
 #include <fstream>
 
 using namespace std;
+
+static std::map<std::string, int> ALLOPHONE_TO_INT = {
+        {"PA1", 0},
+        {"PA2", 1},
+        {"PA3", 2},
+        {"PA4", 3},
+        {"PA5", 4},
+        {"OY",  5},
+        {"AY",  6},
+        {"EH",  7},
+        {"KK3", 8},
+        {"PP",  9},
+        {"JH",  10},
+        {"NN1", 11},
+        {"IH",  12},
+        {"TT2", 13},
+        {"RR1", 14},
+        {"AX",  15},
+        {"MM",  16},
+        {"TT1", 17},
+        {"DH1", 18},
+        {"IY",  19},
+        {"EY",  20},
+        {"DD1", 21},
+        {"UW1", 22},
+        {"AO",  23},
+        {"AA",  24},
+        {"YY2", 25},
+        {"AE",  26},
+        {"HH1", 27},
+        {"BB1", 28},
+        {"TH",  29},
+        {"UH",  30},
+        {"UW2", 31},
+        {"AW",  32},
+        {"DD2", 33},
+        {"GG3", 34},
+        {"VV",  35},
+        {"GG1", 36},
+        {"SH",  37},
+        {"ZH",  38},
+        {"RR2", 39},
+        {"FF",  40},
+        {"KK2", 41},
+        {"KK1", 42},
+        {"ZZ",  43},
+        {"NG",  44},
+        {"LL",  45},
+        {"WW",  46},
+        {"XR",  47},
+        {"WH",  48},
+        {"YY1", 49},
+        {"CH",  50},
+        {"ER1", 51},
+        {"ER2", 52},
+        {"OW",  53},
+        {"DH2", 54},
+        {"SS",  55},
+        {"NN2", 56},
+        {"HH2", 57},
+        {"OR",  58},
+        {"AR",  59},
+        {"YR",  60},
+        {"GG2", 61},
+        {"EL",  62},
+        {"BB2", 63}
+};
 
 Lexicon::Lexicon()
 {
@@ -142,6 +210,15 @@ vector<string> Lexicon::convertPhones(vector<string> &pList) {
 	}
 
 	return newPhones;
+}
+
+vector<int> Lexicon::phonesToInt(vector<string> &pList) {
+    vector<int> intPhones;
+    intPhones.resize(pList.size());
+    for (int i = 0; i < pList.size(); i++) {
+        intPhones[i] = ALLOPHONE_TO_INT[pList[i]];
+    }
+    return intPhones;
 }
 
 //Generates code for the arduino

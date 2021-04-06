@@ -62,12 +62,17 @@ int main() {
 	cout << endl << endl;
 	cout << "cmuPhones:" << endl;
 	for (int i = 0; i < cmuPhones.size(); i++) cout << cmuPhones[i] << " ";
+    cout << endl;
 
 	SP0Phones = lex.convertPhones(cmuPhones);
 	cout << endl << endl;
 	cout << "SP0Phones:" << endl;
 	for (int i = 0; i < SP0Phones.size(); i++) cout << SP0Phones[i] << " ";
+    cout << endl;
 
+	std::vector<int> intPhones = lex.phonesToInt(SP0Phones);
+    for (int i = 0; i < intPhones.size(); i++) cout << intPhones[i] << ",";
+    cout << endl << SP0Phones.size() << " phonemes" << endl;
 	cout << endl << endl;
 
 	ofstream out;

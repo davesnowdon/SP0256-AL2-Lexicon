@@ -15,6 +15,7 @@ public:
 	void findAllInDict(ifstream & stream, string token);
 
 	vector<string> convertPhones(vector<string> &pList);
+	vector<int> phonesToInt(vector<string> &pList);
 	void generateCode(ofstream & stream, vector<string> &pList);
 };
 
