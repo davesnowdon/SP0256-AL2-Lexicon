@@ -71,7 +71,8 @@ int main() {
     cout << endl;
 
 	std::vector<int> intPhones = lex.phonesToInt(SP0Phones);
-    for (int i = 0; i < intPhones.size(); i++) cout << intPhones[i] << ",";
+    for (int i = 0; i < intPhones.size()-1; i++) cout << intPhones[i] << ",";
+    cout << intPhones[intPhones.size()-1];
     cout << endl << SP0Phones.size() << " phonemes" << endl;
 	cout << endl << endl;
 
