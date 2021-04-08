@@ -44,12 +44,15 @@ TEST(NumberExpanderTest, expandThousands) {
 
 TEST(NumberExpanderTest, expandTenThousands) {
     NumberExpander expander;
-    EXPECT_THAT(expander.expand("31234"), testing::ElementsAre("thirty", "one", "thousand", "two", "hundred", "thirty", "four"));
+    EXPECT_THAT(expander.expand("31234"),
+                testing::ElementsAre("thirty", "one", "thousand", "two", "hundred", "thirty", "four"));
 }
 
 TEST(NumberExpanderTest, expandHundredThousands) {
     NumberExpander expander;
-    EXPECT_THAT(expander.expand("131234"), testing::ElementsAre("one", "hundred", "thirty", "one", "thousand", "two", "hundred", "thirty", "four"));
+    EXPECT_THAT(expander.expand("131234"),
+                testing::ElementsAre("one", "hundred", "thirty", "one", "thousand", "two", "hundred", "thirty",
+                                     "four"));
 }
 
 TEST(NumberExpanderTest, expandMIllion) {

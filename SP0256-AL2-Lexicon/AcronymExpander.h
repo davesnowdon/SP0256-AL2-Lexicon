@@ -1,7 +1,3 @@
-//
-// Created by dns on 07/04/2021.
-//
-
 #ifndef SP0256_AL2_LEXICON_ACRONYMEXPANDER_H
 #define SP0256_AL2_LEXICON_ACRONYMEXPANDER_H
 

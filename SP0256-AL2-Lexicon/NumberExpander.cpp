@@ -5,26 +5,29 @@
 #include <algorithm>
 #include "NumberExpander.h"
 
-std::vector<std::string> LESS_THAN_TWENTY_WORDS = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-                                                   "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
+std::vector<std::string> LESS_THAN_TWENTY_WORDS = {"zero", "one", "two", "three", "four", "five", "six", "seven",
+                                                   "eight", "nine",
+                                                   "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+                                                   "sixteen", "seventeen", "eighteen", "nineteen"};
 
-std::vector<std::string> TENS_WORDS = {"", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
+std::vector<std::string> TENS_WORDS = {"", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty",
+                                       "ninety"};
 
 std::vector<std::vector<std::string>> POWERS_OF_TEN_WORDS = {
         {"one"},
         {"ten"},
         {"hundred"},
         {"thousand"},
-        {"ten", "thousand"},
+        {"ten",     "thousand"},
         {"hundred", "thousand"},
         {"million"},
-        {"ten", "million"},
+        {"ten",     "million"},
         {"hundred", "million"},
         {"billion"}};
 
 int POWERS_OF_TEN[] = {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000};
 
-std::vector<std::string> POWERS_OF_THOUSAND_WORDS = { "", "thousand", "million", "billion", "trillion"};
+std::vector<std::string> POWERS_OF_THOUSAND_WORDS = {"", "thousand", "million", "billion", "trillion"};
 
 int POWERS_OF_THOUSAND[] = {1, 1000, 1000000, 1000000000};
 
@@ -33,7 +36,7 @@ bool NumberExpander::shouldExpand(const std::string &word) {
 }
 
 std::vector<std::string> NumberExpander::expand(const std::string &word) {
-    return  expand(std::stoi(word));
+    return expand(std::stoi(word));
 }
 
 // TODO handler numbers bigger than 10 billion
