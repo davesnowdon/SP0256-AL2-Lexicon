@@ -83,6 +83,7 @@ Lexicon::~Lexicon()
 {
 }
 
+
 //spit an input sentence into a vector of strings
 vector<string> Lexicon::splitInput(const std::string& s, char delimiter) {
 	std::vector<std::string> tokens;
@@ -90,20 +91,20 @@ vector<string> Lexicon::splitInput(const std::string& s, char delimiter) {
 	std::istringstream tokenStream(s);
 	while (std::getline(tokenStream, token, delimiter))
 	{
-		tokens.push_back(token);
+            tokens.push_back(token);
 	}
 	return tokens;
 }
 
 //Finds the line matching the token
-void Lexicon::findInDict(ifstream & stream, string token, vector<string> &phoneList) {
-	string line;
+void Lexicon::findInDict(std::ifstream & stream, std::string token, std::vector<string> &phoneList) {
+	std::string line;
 	int lineNum = 1;
 	int instances = 0;
 
-	vector<string> newPhones;
+	std::vector<string> newPhones;
 
-	while (getline(stream, line)) {
+	while (std::getline(stream, line)) {
 		if (line.find(token) != string::npos) {
 			if (token.compare(line.substr(0, token.length())) == 0) {
 				cout << "(line #" << lineNum << ")" << "\t" << line << endl;
@@ -125,11 +126,11 @@ void Lexicon::findInDict(ifstream & stream, string token, vector<string> &phoneL
 }
 
 //Finds all instances of lines containing the token
-void Lexicon::findAllInDict(ifstream & stream, string token) {
-	string line;
+void Lexicon::findAllInDict(std::ifstream & stream, std::string token) {
+	std::string line;
 	int lineNum = 1;
 	int instances = 0;
-	while (getline(stream, line)) {
+	while (std::getline(stream, line)) {
 		if (line.find(token) != string::npos) {
 			cout << "(line #" << lineNum << ")" << "\t" << line << endl;
 			instances++;

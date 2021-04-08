@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-using namespace std;
+#include "WordExpander.h"
 
 class Lexicon
 {
@@ -10,12 +10,12 @@ public:
 	Lexicon();
 	~Lexicon();
 
-	vector<string> splitInput(const std::string& s, char delimiter);
-	void findInDict(ifstream & stream, string token, vector<string> &phoneList);
-	void findAllInDict(ifstream & stream, string token);
+	std::vector<std::string> splitInput(const std::string& s, char delimiter);
+	void findInDict(std::ifstream & stream, std::string token, std::vector<std::string> &phoneList);
+	void findAllInDict(std::ifstream & stream, std::string token);
 
-	vector<string> convertPhones(vector<string> &pList);
-	vector<int> phonesToInt(vector<string> &pList);
-	void generateCode(ofstream & stream, vector<string> &pList);
+	std::vector<std::string> convertPhones(std::vector<std::string> &pList);
+	std::vector<int> phonesToInt(std::vector<std::string> &pList);
+	void generateCode(std::ofstream & stream, std::vector<std::string> &pList);
 };
 

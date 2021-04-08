@@ -3,15 +3,25 @@
 #include <string>
 #include <locale>
 #include <vector>
+#include <algorithm>
 #include "Lexicon.h"
+#include "NumberExpander.h"
+#include "AcronymExpander.h"
 
 using namespace std;
+
+void wordsToLower(std::vector<std::string> &words) {
+    for(std::string &s : words){
+        std::transform(s.begin(), s.end(), s.begin(),
+                       [](char c){ return std::tolower(c); });
+    }
+}
+
 
 int main() {
 	Lexicon lex;
 	string input;
 	string line;
-	locale loc;
 	vector<string> wordList;
 	vector<string> cmuPhones;
 	vector<string> SP0Phones;
@@ -42,20 +52,42 @@ int main() {
 		cout << "Input: " << input << endl;
 	}
 
-	for (std::string::size_type i = 0; i < input.length(); ++i) {
-		input[i] = std::tolower(input[i], loc);
-	}
+	std::vector<WordExpander*> expanders = {
+	        new NumberExpander(),
+	        new AcronymExpander()
+	};
 
 	wordList = lex.splitInput(input, ' ');
+
+	std::vector<std::string> expandedWordList;
+    for(std::string &word : wordList) {
+        bool wasExpanded = false;
+        for(std::vector<WordExpander*>::const_iterator it = expanders.begin(); it != expanders.end(); ++it) {
+            if ((*it)->shouldExpand(word)) {
+                std::vector<std::string> expanded = (*it)->expand(word);
+                expandedWordList.insert(expandedWordList.end(), expanded.begin(), expanded.end());
+                wasExpanded = true;
+                break;
+            }
+        }
+        if (!wasExpanded) {
+            expandedWordList.push_back(word);
+        }
+    }
+    wordsToLower(expandedWordList);
+
+    cout << "Expanded word list: ";
+    for (int i = 0; i < expandedWordList.size(); i++) cout << expandedWordList[i] << " ";
+    cout << endl;
 
 	ifstream dict;
 	dict.open("./cmudict/cmudict.dict");
 	if (!dict.is_open()) cout << "Unable to open dictionary file";
 
 
-	for (int i = 0; i < wordList.size(); i++) {
-		cout << "Searching dictionary for \"" << wordList[i] << "\"" << "..." << endl;
-		lex.findInDict(dict, wordList[i], cmuPhones);
+	for (int i = 0; i < expandedWordList.size(); i++) {
+		cout << "Searching dictionary for \"" << expandedWordList[i] << "\"" << "..." << endl;
+		lex.findInDict(dict, expandedWordList[i], cmuPhones);
 	}
 	
 	dict.close();
