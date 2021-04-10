@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "NumberExpander.h"
-#include "lib/googlemock/include/gmock/gmock-matchers.h"
+#include "gmock/gmock-matchers.h"
 
 TEST(NumberExpanderTest, shouldExpandInteger) {
     NumberExpander expander;
