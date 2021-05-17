@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <regex>
 #include <string>
 #include <locale>
 #include <vector>
@@ -54,7 +55,18 @@ int main() {
             new AcronymExpander()
     };
 
-    wordList = lex.splitInput(input, ' ');
+    // strip punctuation characters
+    // hyphens should be replaced by spaces
+    input = std::regex_replace(input, std::regex("-"), " ");
+    // any other punctuation characters can be removed
+    std::string inputWithoutPunctuation;
+    std::remove_copy_if(input.begin(), input.end(),
+                        std::back_inserter(inputWithoutPunctuation),
+                        std::ptr_fun<int, int>(&std::ispunct)
+    );
+    std::cout << "Without punctuation: " << inputWithoutPunctuation << std::endl;
+
+    wordList = lex.splitInput(inputWithoutPunctuation, ' ');
 
     std::vector<std::string> expandedWordList;
     for (std::string &word : wordList) {
